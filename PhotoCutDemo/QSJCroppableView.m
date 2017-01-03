@@ -120,10 +120,10 @@
     CGRect croppedRect = aPath.bounds;
     croppedRect.origin.y = rect.size.height - CGRectGetMaxY(aPath.bounds);
     
-    croppedRect.origin.x = croppedRect.origin.x *3;
-    croppedRect.origin.y = croppedRect.origin.y *3;
-    croppedRect.size.width = croppedRect.size.width *3;
-    croppedRect.size.height = croppedRect.size.height *3;
+    croppedRect.origin.x = croppedRect.origin.x*1.8;
+    croppedRect.origin.y = croppedRect.origin.y*1.8;
+    croppedRect.size.width = croppedRect.size.width*10;
+    croppedRect.size.height = croppedRect.size.height*10;
     
     CGImageRef imageRef = CGImageCreateWithImageInRect(maskedImage.CGImage, croppedRect);
     

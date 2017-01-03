@@ -20,10 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 300, 300)];
+    imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-50, self.view.frame.size.height-50)];
     imageView.center = self.view.center;
     [imageView setImage:self.cutImage];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
+    //[imageView setContentMode:UIViewContentModeScaleToFill];
     [self.view addSubview:imageView];
 }
 
