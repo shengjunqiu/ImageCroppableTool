@@ -7,6 +7,7 @@
 //
 
 #import "DoneVC.h"
+#import "QSJCroppableView.h"
 
 @interface DoneVC ()
 
@@ -17,18 +18,89 @@
     UIImageView *imageView;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-50, self.view.frame.size.height-50)];
     imageView.center = self.view.center;
     [imageView setImage:self.cutImage];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
-    //[imageView setContentMode:UIViewContentModeScaleToFill];
+    
+    //开启交互
+    imageView.userInteractionEnabled = YES;
+    
+    [self addGesture];
     [self.view addSubview:imageView];
+
 }
 
-- (void)didReceiveMemoryWarning {
+//添加手势
+- (void)addGesture
+{
+    //添加捏合手势
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchImage:)];
+    [self.view addGestureRecognizer:pinchGesture];
+    
+    //添加旋转手势
+    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateImage:)];
+    [self.view addGestureRecognizer:rotationGesture];
+    
+    //添加拖动手势
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panImage:)];
+    [imageView addGestureRecognizer:panGesture];
+    
+    
+}
+
+//捏合手势操作
+- (void)pinchImage:(UIPinchGestureRecognizer *)gesture
+{
+    if(gesture.state == UIGestureRecognizerStateChanged)
+    {
+        imageView.transform = CGAffineTransformMakeScale(gesture.scale, gesture.scale);
+    }
+//    else if (gesture.state == UIGestureRecognizerStateEnded)
+//    {
+//        [UIView animateWithDuration:.5 animations:^{
+//            imageView.transform = CGAffineTransformIdentity;
+//        }];
+//    }
+}
+
+//旋转手势操作
+- (void)rotateImage:(UIRotationGestureRecognizer *)gesture
+{
+    if(gesture.state == UIGestureRecognizerStateChanged)
+    {
+        imageView.transform = CGAffineTransformMakeRotation(gesture.rotation);
+    }
+//    else if (gesture.state == UIGestureRecognizerStateEnded)
+//    {
+//        [UIView animateWithDuration:.8 animations:^{
+//            imageView.transform = CGAffineTransformIdentity;
+//        }];
+//    }
+
+}
+
+//拖动手势操作
+- (void)panImage:(UIPanGestureRecognizer *)gesture
+{
+    if(gesture.state == UIGestureRecognizerStateChanged)
+    {
+        CGPoint traslation = [gesture translationInView:self.view];
+        imageView.transform = CGAffineTransformMakeTranslation(traslation.x, traslation.y);
+    }
+//    else if (gesture.state == UIGestureRecognizerStateEnded)
+//    {
+//        imageView.transform = CGAffineTransformIdentity;
+//    }
+}
+
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

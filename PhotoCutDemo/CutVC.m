@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"抠图Demo";
+    self.navigationItem.title = @"PhotoCutDemo";
     
     UIBarButtonItem *cutBtn = [[UIBarButtonItem alloc] initWithTitle:@"CUT" style:UIBarButtonItemStylePlain target:self action:@selector(btnCut)];
     self.navigationItem.rightBarButtonItem = cutBtn;

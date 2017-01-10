@@ -120,10 +120,12 @@
     CGRect croppedRect = aPath.bounds;
     croppedRect.origin.y = rect.size.height - CGRectGetMaxY(aPath.bounds);
     
-    croppedRect.origin.x = croppedRect.origin.x*1.8;
-    croppedRect.origin.y = croppedRect.origin.y*1.8;
-    croppedRect.size.width = croppedRect.size.width*10;
-    croppedRect.size.height = croppedRect.size.height*10;
+    CGFloat screentScale = [UIScreen mainScreen].scale;
+    
+    croppedRect.origin.x = croppedRect.origin.x*screentScale;
+    croppedRect.origin.y = croppedRect.origin.y*screentScale;
+    croppedRect.size.width = croppedRect.size.width*screentScale;
+    croppedRect.size.height = croppedRect.size.height*screentScale;
     
     CGImageRef imageRef = CGImageCreateWithImageInRect(maskedImage.CGImage, croppedRect);
     
