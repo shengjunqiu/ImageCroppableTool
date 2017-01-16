@@ -81,12 +81,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
     [self.lineColor setStroke];
     [self.croppingPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
-    
-    
-    
 }
 
 - (UIImage *)deleteBackgroundOfImage:(UIImageView *)image
@@ -96,8 +92,6 @@
     CGRect rect = CGRectZero;
     rect.size = image.image.size;
     
-    //绘制曲线
-    //实例化一个贝塞尔曲线对象
     UIBezierPath *aPath;
     UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0.0);
     {
@@ -108,7 +102,7 @@
         aPath = [UIBezierPath bezierPath];
         
         
-        //// Set the starting point of the shape.
+        //Set the starting point of the shape.
         CGPoint p1 = [QSJCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
         [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
         
@@ -155,7 +149,7 @@
     return maskedImage;
 }
 
-//触摸绘制贝塞尔曲线
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
@@ -168,11 +162,8 @@
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
     [self.croppingPath addLineToPoint:[mytouch locationInView:self]];
     [self setNeedsDisplay];
-    
-
 }
 
-//触摸结束时调用
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     curve = [[UIBezierPath alloc] init];
@@ -190,14 +181,11 @@
     [self.layer addSublayer:shapeLayer];
     
     [self setUserInteractionEnabled:NO];
-
-    
 }
 
 
 - (NSArray *)pointInBezierPath
 {
-    //croppingPath上存在的点
     self.pointArray = self.croppingPath.points;
     NSLog(@"总数：%ld",self.pointArray.count);
     

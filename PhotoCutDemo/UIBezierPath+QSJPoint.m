@@ -12,7 +12,6 @@
 #define VALUE(_INDEX_) [NSValue valueWithCGPoint:points[_INDEX_]]
 #define POINT(_INDEX_) [(NSValue *)[points objectAtIndex:_INDEX_] CGPointValue]
 
-//计算两点之间的距离
 static float distance (CGPoint p1, CGPoint p2)
 {
     float dx = p2.x - p1.x;
@@ -47,7 +46,6 @@ void getPointsFromBezier(void *info, const CGPathElement *element)
     return points;
 }
 
-//根据所提供的点构建贝塞尔曲线
 + (UIBezierPath *)pathWithPoints:(NSArray *)points
 {
     UIBezierPath *path = [UIBezierPath bezierPath];

@@ -95,7 +95,7 @@
     
 }
 
-CGFloat ObliqueAngleOfStraightThrough(CGPoint point1, CGPoint point2)   //  [-π/2, 3π/2)
+CGFloat ObliqueAngleOfStraightThrough(CGPoint point1, CGPoint point2)
 {
     CGFloat obliqueRatio = 0;
     CGFloat obliqueAngle = 0;
@@ -121,7 +121,6 @@ CGFloat ObliqueAngleOfStraightThrough(CGPoint point1, CGPoint point2)   //  [-π
     return obliqueAngle;
 }
 
-//三阶贝塞尔曲线
 CGPoint ControlPointForTheBezierCanThrough3Point(CGPoint point1, CGPoint point2, CGPoint point3)
 {
     return CGPointMake(2 * point2.x - (point1.x + point3.x) / 2, 2 * point2.y - (point1.y + point3.y) / 2);
