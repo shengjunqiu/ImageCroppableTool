@@ -21,6 +21,8 @@
 		3AE8D84E1E1B385300187408 /* QSJNavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8D84D1E1B385300187408 /* QSJNavVC.m */; };
 		3AE8D8511E1B3ED000187408 /* CutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8D8501E1B3ED000187408 /* CutVC.m */; };
 		3AE8D8541E1B456700187408 /* DoneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE8D8531E1B456700187408 /* DoneVC.m */; };
+		3AE9EE161E2B0FA80060976D /* QSJPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9EE151E2B0FA80060976D /* QSJPointView.m */; };
+		3AE9EE1C1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9EE1B1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,10 @@
 		3AE8D8501E1B3ED000187408 /* CutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CutVC.m; sourceTree = "<group>"; };
 		3AE8D8521E1B456700187408 /* DoneVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoneVC.h; sourceTree = "<group>"; };
 		3AE8D8531E1B456700187408 /* DoneVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoneVC.m; sourceTree = "<group>"; };
+		3AE9EE141E2B0FA80060976D /* QSJPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = QSJPointView.h; path = ../QSJPointView.h; sourceTree = "<group>"; };
+		3AE9EE151E2B0FA80060976D /* QSJPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = QSJPointView.m; path = ../QSJPointView.m; sourceTree = "<group>"; };
+		3AE9EE1A1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+QSJ3DPoint.h"; sourceTree = "<group>"; };
+		3AE9EE1B1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+QSJ3DPoint.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,8 @@
 				3A1CEF3F1E163F1100CB2C6B /* QSJCroppableView.m */,
 				3A1CEF3B1E163E4100CB2C6B /* UIBezierPath+QSJPoint.h */,
 				3A1CEF3C1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m */,
+				3AE9EE1A1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.h */,
+				3AE9EE1B1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.m */,
 			);
 			name = CroppableClasses;
 			sourceTree = "<group>";
@@ -139,15 +147,10 @@
 			isa = PBXGroup;
 			children = (
 				3A1CEF431E164B5900CB2C6B /* AppDelegate */,
+				3AE9EE1D1E2B338E0060976D /* VIewController */,
 				3A1CEF421E164A2C00CB2C6B /* CroppableClasses */,
-				3ACD95D91E14A96400E6B2B4 /* ViewController.h */,
-				3ACD95DA1E14A96400E6B2B4 /* ViewController.m */,
-				3AE8D84C1E1B385300187408 /* QSJNavVC.h */,
-				3AE8D84D1E1B385300187408 /* QSJNavVC.m */,
-				3AE8D84F1E1B3ED000187408 /* CutVC.h */,
-				3AE8D8501E1B3ED000187408 /* CutVC.m */,
-				3AE8D8521E1B456700187408 /* DoneVC.h */,
-				3AE8D8531E1B456700187408 /* DoneVC.m */,
+				3AE9EE141E2B0FA80060976D /* QSJPointView.h */,
+				3AE9EE151E2B0FA80060976D /* QSJPointView.m */,
 				3ACD95D31E14A96400E6B2B4 /* Supporting Files */,
 			);
 			path = PhotoCutDemo;
@@ -182,6 +185,21 @@
 				3ACD95FA1E14A96400E6B2B4 /* Info.plist */,
 			);
 			path = PhotoCutDemoUITests;
+			sourceTree = "<group>";
+		};
+		3AE9EE1D1E2B338E0060976D /* VIewController */ = {
+			isa = PBXGroup;
+			children = (
+				3ACD95D91E14A96400E6B2B4 /* ViewController.h */,
+				3ACD95DA1E14A96400E6B2B4 /* ViewController.m */,
+				3AE8D84C1E1B385300187408 /* QSJNavVC.h */,
+				3AE8D84D1E1B385300187408 /* QSJNavVC.m */,
+				3AE8D84F1E1B3ED000187408 /* CutVC.h */,
+				3AE8D8501E1B3ED000187408 /* CutVC.m */,
+				3AE8D8521E1B456700187408 /* DoneVC.h */,
+				3AE8D8531E1B456700187408 /* DoneVC.m */,
+			);
+			name = VIewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,8 +339,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE9EE1C1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.m in Sources */,
 				3ACD95DB1E14A96400E6B2B4 /* ViewController.m in Sources */,
 				3AE8D84E1E1B385300187408 /* QSJNavVC.m in Sources */,
+				3AE9EE161E2B0FA80060976D /* QSJPointView.m in Sources */,
 				3AE8D8541E1B456700187408 /* DoneVC.m in Sources */,
 				3A1CEF3D1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m in Sources */,
 				3ACD95D81E14A96400E6B2B4 /* AppDelegate.m in Sources */,

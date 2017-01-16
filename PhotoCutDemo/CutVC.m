@@ -9,6 +9,8 @@
 #import "CutVC.h"
 #import "QSJCroppableView.h"
 #import "DoneVC.h"
+#import "QSJPointView.h"
+#import "UIBezierPath+QSJ3DPoint.h"
 
 @interface CutVC ()
 {
