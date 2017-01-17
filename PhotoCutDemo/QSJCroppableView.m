@@ -19,8 +19,6 @@
     CAShapeLayer *shapeLayer;
 }
 
-
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -29,6 +27,7 @@
     }
     return self;
 }
+
 - (id)initWithImageView:(UIImageView *)imageView
 {
     self = [super initWithFrame:imageView.frame];
@@ -100,7 +99,6 @@
         [[UIColor whiteColor] setFill];
         
         aPath = [UIBezierPath bezierPath];
-        
         
         //Set the starting point of the shape.
         CGPoint p1 = [QSJCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
@@ -189,6 +187,7 @@
     shapeLayer.lineWidth = 9.0;
     shapeLayer.path = curve.CGPath;
     shapeLayer.lineCap = kCALineCapRound;
+    
     [self.layer addSublayer:shapeLayer];
     
     plusShapeLayer.strokeColor = [UIColor whiteColor].CGColor;
@@ -196,6 +195,7 @@
     plusShapeLayer.lineWidth = 9.0;
     plusShapeLayer.path = plusCurve.CGPath;
     plusShapeLayer.lineCap = kCALineCapRound;
+    
     [self.layer addSublayer:plusShapeLayer];
     
     [self setUserInteractionEnabled:NO];
@@ -205,17 +205,15 @@
 - (NSArray *)pointInBezierPath
 {
     self.pointArray = self.croppingPath.points;
-    NSLog(@"总数：%ld",self.pointArray.count);
-    
     self.keepPointArray = [NSMutableArray arrayWithArray:self.pointArray];
-    
     NSMutableArray *finalPointArray = [NSMutableArray array];
+    
     for(int i = 0;i<self.keepPointArray.count;i++){
         if(i%2 == 0){
             [finalPointArray addObject:[self.keepPointArray objectAtIndex:i]];
         }
     }
-    NSLog(@"%ld",finalPointArray.count);
+    
     return finalPointArray;
 }
 
