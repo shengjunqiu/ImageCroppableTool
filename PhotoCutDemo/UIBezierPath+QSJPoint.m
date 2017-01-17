@@ -67,7 +67,6 @@ void getPointsFromBezier(void *info, const CGPathElement *element)
 
 - (NSArray *)pointPercentArray
 {
-    // Use total length to calculate the percent of path consumed at each control point
     NSArray *points = self.points;
     NSInteger pointCount = points.count;
     
@@ -83,15 +82,13 @@ void getPointsFromBezier(void *info, const CGPathElement *element)
         [pointPercentArray addObject:@(distanceTravelled / totalPointLength)];
     }
     
-    // Add a final item just to stop with. Probably not needed.
-    [pointPercentArray addObject:[NSNumber numberWithFloat:1.1f]];//110%
+    [pointPercentArray addObject:[NSNumber numberWithFloat:1.1f]];
     
     return pointPercentArray;
 }
 
 - (CGPoint)pointAtPercent:(CGFloat)percent withSlope: (CGPoint *)slope
 {
-    
     NSArray *points = self.points;
     NSArray *percentArray = self.pointPercentArray;
     CFIndex lastPointIndex = points.count - 1;
@@ -99,23 +96,19 @@ void getPointsFromBezier(void *info, const CGPathElement *element)
     if (!points.count)
         return CGPointZero;
     
-    // Check for 0% and 100%
     if (percent <= 0.0f) return POINT(0);
     if (percent >= 1.0f) return POINT(lastPointIndex);
     
-    //Find a corresponding pair of points in the path
     CFIndex index = 1;
     while ((index < percentArray.count) &&
            (percent > ((NSNumber *)percentArray[index]).floatValue))
         index++;
     
-    // This should not happen.
     if (index > lastPointIndex) return POINT(lastPointIndex);
     
     CGPoint point1 = POINT(index - 1);
     CGPoint point2 = POINT(index);
     
-    // Calculate the intermediate distance between the two points
     float percent1 = [[percentArray objectAtIndex:index - 1] floatValue];
     float percent2 = [[percentArray objectAtIndex:index] floatValue];
     float percentOffset = (percent - percent1) / (percent2 - percent1);
@@ -123,10 +116,8 @@ void getPointsFromBezier(void *info, const CGPathElement *element)
     float dx = point2.x - point1.x;
     float dy = point2.y - point1.y;
     
-    // Store dy, dx for retrieving arctan
     if (slope) *slope = CGPointMake(dx, dy);
     
-    // Calculate new point
     CGFloat newX = point1.x + (percentOffset * dx);
     CGFloat newY = point1.y + (percentOffset * dy);
     CGPoint targetPoint = CGPointMake(newX, newY);

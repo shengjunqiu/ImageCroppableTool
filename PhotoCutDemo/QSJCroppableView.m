@@ -113,9 +113,12 @@
         
         for (uint i = 1; i<points.count; i++)
         {
-            CGPoint p = [QSJCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
-            
-            [croppablePointArray addObject:[NSValue valueWithCGPoint:p]];
+            if(i%2 == 0)
+            {
+                CGPoint p = [QSJCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
+                
+                [croppablePointArray addObject:[NSValue valueWithCGPoint:p]];
+            }
         }
         
         [aPath addBezierThroughPoints:croppablePointArray];
