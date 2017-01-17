@@ -104,11 +104,24 @@
         CGPoint p1 = [QSJCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
         [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
         
+//        for (uint i = 1; i<points.count; i++)
+//        {
+//            CGPoint p = [QSJCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
+//            [aPath addLineToPoint:CGPointMake(p.x, p.y)];
+//        }
+        
+        NSMutableArray *croppablePointArray = [[NSMutableArray alloc] init];
+        
         for (uint i = 1; i<points.count; i++)
         {
             CGPoint p = [QSJCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
-            [aPath addLineToPoint:CGPointMake(p.x, p.y)];
+            
+            [croppablePointArray addObject:[NSValue valueWithCGPoint:p]];
         }
+        
+        NSLog(@"%@",croppablePointArray);
+        
+        [aPath addBezierThroughPoints:croppablePointArray];
         
         [aPath closePath];
         [aPath fill];
@@ -201,15 +214,16 @@
     [self setUserInteractionEnabled:NO];
 }
 
-
 - (NSArray *)pointInBezierPath
 {
     self.pointArray = self.croppingPath.points;
     self.keepPointArray = [NSMutableArray arrayWithArray:self.pointArray];
     NSMutableArray *finalPointArray = [NSMutableArray array];
     
-    for(int i = 0;i<self.keepPointArray.count;i++){
-        if(i%2 == 0){
+    for(int i = 0;i<self.keepPointArray.count;i++)
+    {
+        if(i%2 == 0)
+        {
             [finalPointArray addObject:[self.keepPointArray objectAtIndex:i]];
         }
     }
