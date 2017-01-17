@@ -33,13 +33,13 @@
 {
     self = [super initWithFrame:imageView.frame];
     if (self) {
-        self.lineWidth = 13.0f;
+        self.lineWidth = 13.0;
         [self setBackgroundColor:[UIColor clearColor]];
         [self setClipsToBounds:YES];
         [self setUserInteractionEnabled:YES];
         self.croppingPath = [[UIBezierPath alloc] init];
         [self.croppingPath setLineWidth:self.lineWidth];
-        self.lineColor = [UIColor lightGrayColor];
+        self.lineColor = [UIColor colorWithWhite:1.0 alpha:0.7];
     }
     return self;
 }
@@ -167,18 +167,36 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     curve = [[UIBezierPath alloc] init];
-    NSValue * firstPointValue = [self pointInBezierPath].firstObject;
+    shapeLayer = [CAShapeLayer layer];
+
+    UIBezierPath *plusCurve = [[UIBezierPath alloc] init];
+    CAShapeLayer *plusShapeLayer = [CAShapeLayer layer];
+    
+    NSValue *firstPointValue = [self pointInBezierPath].firstObject;
+    NSValue *lastPointValue = [self pointInBezierPath].lastObject;
+    
+    NSArray *plusPointArray = [NSArray arrayWithObjects:firstPointValue,lastPointValue,nil];
+    NSLog(@"%@",plusPointArray);
     
     [curve moveToPoint:firstPointValue.CGPointValue];
     [curve addBezierThroughPoints:[self pointInBezierPath]];
     
-    shapeLayer = [CAShapeLayer layer];
+    [plusCurve moveToPoint:lastPointValue.CGPointValue];
+    [plusCurve addBezierThroughPoints:plusPointArray];
+    
     shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
     shapeLayer.fillColor = nil;
-    shapeLayer.lineWidth = 9;
+    shapeLayer.lineWidth = 9.0;
     shapeLayer.path = curve.CGPath;
     shapeLayer.lineCap = kCALineCapRound;
     [self.layer addSublayer:shapeLayer];
+    
+    plusShapeLayer.strokeColor = [UIColor whiteColor].CGColor;
+    plusShapeLayer.fillColor = nil;
+    plusShapeLayer.lineWidth = 9.0;
+    plusShapeLayer.path = plusCurve.CGPath;
+    plusShapeLayer.lineCap = kCALineCapRound;
+    [self.layer addSublayer:plusShapeLayer];
     
     [self setUserInteractionEnabled:NO];
 }
