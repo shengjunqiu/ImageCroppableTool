@@ -100,7 +100,6 @@
         
         aPath = [UIBezierPath bezierPath];
         
-        //Set the starting point of the shape.
         CGPoint p1 = [QSJCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
         [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
         
@@ -118,8 +117,6 @@
             
             [croppablePointArray addObject:[NSValue valueWithCGPoint:p]];
         }
-        
-        NSLog(@"%@",croppablePointArray);
         
         [aPath addBezierThroughPoints:croppablePointArray];
         

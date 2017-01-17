@@ -26,12 +26,12 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"PhotoCutDemo";
+    self.navigationItem.title = @"ImageCroppableTool";
     
-    UIBarButtonItem *cutBtn = [[UIBarButtonItem alloc] initWithTitle:@"CUT" style:UIBarButtonItemStylePlain target:self action:@selector(btnCut)];
+    UIBarButtonItem *cutBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(btnCut)];
     self.navigationItem.rightBarButtonItem = cutBtn;
     
-    UIBarButtonItem *resetBtn = [[UIBarButtonItem alloc] initWithTitle:@"RESET" style:UIBarButtonItemStylePlain target:self action:@selector(btnReset)];
+    UIBarButtonItem *resetBtn = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(btnReset)];
     self.navigationItem.leftBarButtonItem = resetBtn;
     
     cuttingImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
