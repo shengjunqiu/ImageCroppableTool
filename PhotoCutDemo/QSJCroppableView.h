@@ -16,6 +16,7 @@
 
 @property (nonatomic,copy) NSArray *pointArray;
 @property (nonatomic,copy) NSMutableArray *keepPointArray;
+@property (nonatomic,strong) UIBezierPath *finalCurve;
 
 - (id)initWithImageView:(UIImageView *)imageView;
 + (CGPoint)convertPoint:(CGPoint)point1 fromRect1:(CGSize)rect1 toRect2: (CGSize)rect2;

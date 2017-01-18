@@ -173,8 +173,11 @@
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
     [self.croppingPath addLineToPoint:[mytouch locationInView:self]];
     [self setNeedsDisplay];
+    
+    
 }
 
+#pragma mark----------TouchEnded----------
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     curve = [[UIBezierPath alloc] init];
@@ -196,7 +199,7 @@
     [plusCurve addBezierThroughPoints:plusPointArray];
     
     shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
-    shapeLayer.fillColor = nil;
+    shapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.3].CGColor;
     shapeLayer.lineWidth = 9.0;
     shapeLayer.path = curve.CGPath;
     shapeLayer.lineCap = kCALineCapRound;
@@ -204,12 +207,14 @@
     [self.layer addSublayer:shapeLayer];
     
     plusShapeLayer.strokeColor = [UIColor whiteColor].CGColor;
-    plusShapeLayer.fillColor = nil;
+    plusShapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.3].CGColor;
     plusShapeLayer.lineWidth = 9.0;
     plusShapeLayer.path = plusCurve.CGPath;
     plusShapeLayer.lineCap = kCALineCapRound;
     
     [self.layer addSublayer:plusShapeLayer];
+    
+    
     
     [self setUserInteractionEnabled:NO];
 }
