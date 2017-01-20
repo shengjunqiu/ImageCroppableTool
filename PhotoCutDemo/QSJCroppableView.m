@@ -13,7 +13,7 @@
 
 #define RGBAColor(r,g,b,a)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define RGBColor(r,g,b)     RGBAColor(r,g,b,1.0)
-#define RGBColorC(c)        RGBColor((((int)c) >> 16),((((int)c) >> 8) & 0xff),(((int)c) & 0xff))
+#define Color(c)        RGBColor((((int)c) >> 16),((((int)c) >> 8) & 0xff),(((int)c) & 0xff))
 
 @implementation QSJCroppableView
 {
@@ -177,7 +177,7 @@
     firstPointValue = [self pointInBezierPath].firstObject;
     [curve moveToPoint:firstPointValue.CGPointValue];
     [curve addBezierThroughPoints:[self pointInBezierPath]];
-    shapeLayer.strokeColor = RGBColorC(0x0093ff).CGColor;
+    shapeLayer.strokeColor = Color(0x0093ff).CGColor;
     shapeLayer.fillColor = nil;
     shapeLayer.lineWidth = 5.0;
     shapeLayer.path = curve.CGPath;
@@ -210,7 +210,7 @@
     [finalPlusCurve moveToPoint:lastPointValue.CGPointValue];
     [finalPlusCurve addBezierThroughPoints:plusPointArray];
     
-    finalPlusLayer.strokeColor = RGBColorC(0x0093ff).CGColor;
+    finalPlusLayer.strokeColor = Color(0x0093ff).CGColor;
     finalPlusLayer.fillColor = nil;
     finalPlusLayer.lineWidth = 5.0;
     finalPlusLayer.path = finalPlusCurve.CGPath;
