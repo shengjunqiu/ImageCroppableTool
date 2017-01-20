@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A1CEF3D1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1CEF3C1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m */; };
-		3A1CEF401E163F1100CB2C6B /* QSJCroppableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1CEF3F1E163F1100CB2C6B /* QSJCroppableView.m */; };
+		3ACB47D21E31FFFB0082E391 /* QSJCroppableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACB47D11E31FFFB0082E391 /* QSJCroppableView.m */; };
 		3ACD95D51E14A96400E6B2B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD95D41E14A96400E6B2B4 /* main.m */; };
 		3ACD95D81E14A96400E6B2B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD95D71E14A96400E6B2B4 /* AppDelegate.m */; };
 		3ACD95DB1E14A96400E6B2B4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACD95DA1E14A96400E6B2B4 /* ViewController.m */; };
@@ -46,7 +46,7 @@
 		3A1CEF3B1E163E4100CB2C6B /* UIBezierPath+QSJPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+QSJPoint.h"; sourceTree = "<group>"; };
 		3A1CEF3C1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+QSJPoint.m"; sourceTree = "<group>"; };
 		3A1CEF3E1E163F1100CB2C6B /* QSJCroppableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QSJCroppableView.h; sourceTree = "<group>"; };
-		3A1CEF3F1E163F1100CB2C6B /* QSJCroppableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSJCroppableView.m; sourceTree = "<group>"; };
+		3ACB47D11E31FFFB0082E391 /* QSJCroppableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QSJCroppableView.m; sourceTree = "<group>"; };
 		3ACD95D01E14A96400E6B2B4 /* PhotoCutDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoCutDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3ACD95D41E14A96400E6B2B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3ACD95D61E14A96400E6B2B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				3A1CEF3E1E163F1100CB2C6B /* QSJCroppableView.h */,
-				3A1CEF3F1E163F1100CB2C6B /* QSJCroppableView.m */,
+				3ACB47D11E31FFFB0082E391 /* QSJCroppableView.m */,
 				3A1CEF3B1E163E4100CB2C6B /* UIBezierPath+QSJPoint.h */,
 				3A1CEF3C1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m */,
 				3AE9EE1A1E2B2D9D0060976D /* UIBezierPath+QSJ3DPoint.h */,
@@ -343,11 +343,11 @@
 				3ACD95DB1E14A96400E6B2B4 /* ViewController.m in Sources */,
 				3AE8D84E1E1B385300187408 /* QSJNavVC.m in Sources */,
 				3AE9EE161E2B0FA80060976D /* QSJPointView.m in Sources */,
+				3ACB47D21E31FFFB0082E391 /* QSJCroppableView.m in Sources */,
 				3AE8D8541E1B456700187408 /* DoneVC.m in Sources */,
 				3A1CEF3D1E163E4100CB2C6B /* UIBezierPath+QSJPoint.m in Sources */,
 				3ACD95D81E14A96400E6B2B4 /* AppDelegate.m in Sources */,
 				3ACD95D51E14A96400E6B2B4 /* main.m in Sources */,
-				3A1CEF401E163F1100CB2C6B /* QSJCroppableView.m in Sources */,
 				3AE8D8511E1B3ED000187408 /* CutVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

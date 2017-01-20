@@ -11,12 +11,15 @@
 #import "UIBezierPath+QSJ3DPoint.h"
 #import "QSJPointView.h"
 
+#define RGBAColor(r,g,b,a)  [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define RGBColor(r,g,b)     RGBAColor(r,g,b,1.0)
+#define RGBColorC(c)        RGBColor((((int)c) >> 16),((((int)c) >> 8) & 0xff),(((int)c) & 0xff))
 
 @implementation QSJCroppableView
 {
     UIBezierPath *curve;
-    NSMutableArray *pointViewArray;
     CAShapeLayer *shapeLayer;
+    NSValue *firstPointValue;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,13 +35,13 @@
 {
     self = [super initWithFrame:imageView.frame];
     if (self) {
-        self.lineWidth = 13.0;
+        self.lineWidth = 5.0;
         [self setBackgroundColor:[UIColor clearColor]];
         [self setClipsToBounds:YES];
         [self setUserInteractionEnabled:YES];
         self.croppingPath = [[UIBezierPath alloc] init];
         [self.croppingPath setLineWidth:self.lineWidth];
-        self.lineColor = [UIColor colorWithWhite:1.0 alpha:0.7];
+        self.lineColor = [UIColor clearColor];
     }
     return self;
 }
@@ -103,12 +106,6 @@
         CGPoint p1 = [QSJCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
         [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
         
-//        for (uint i = 1; i<points.count; i++)
-//        {
-//            CGPoint p = [QSJCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
-//            [aPath addLineToPoint:CGPointMake(p.x, p.y)];
-//        }
-        
         NSMutableArray *croppablePointArray = [[NSMutableArray alloc] init];
         
         for (uint i = 1; i<points.count; i++)
@@ -161,12 +158,13 @@
 }
 
 
+#pragma mark----------TouchEvent----------
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
     [self.croppingPath moveToPoint:[mytouch locationInView:self]];
+    
 }
-
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -174,48 +172,63 @@
     [self.croppingPath addLineToPoint:[mytouch locationInView:self]];
     [self setNeedsDisplay];
     
-    
-}
-
-#pragma mark----------TouchEnded----------
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
     curve = [[UIBezierPath alloc] init];
     shapeLayer = [CAShapeLayer layer];
-
-    UIBezierPath *plusCurve = [[UIBezierPath alloc] init];
-    CAShapeLayer *plusShapeLayer = [CAShapeLayer layer];
-    
-    NSValue *firstPointValue = [self pointInBezierPath].firstObject;
-    NSValue *lastPointValue = [self pointInBezierPath].lastObject;
-    
-    NSArray *plusPointArray = [NSArray arrayWithObjects:firstPointValue,lastPointValue,nil];
-    NSLog(@"%@",plusPointArray);
-    
+    firstPointValue = [self pointInBezierPath].firstObject;
     [curve moveToPoint:firstPointValue.CGPointValue];
     [curve addBezierThroughPoints:[self pointInBezierPath]];
-    
-    [plusCurve moveToPoint:lastPointValue.CGPointValue];
-    [plusCurve addBezierThroughPoints:plusPointArray];
-    
-    shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
-    shapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.3].CGColor;
-    shapeLayer.lineWidth = 9.0;
+    shapeLayer.strokeColor = RGBColorC(0x0093ff).CGColor;
+    shapeLayer.fillColor = nil;
+    shapeLayer.lineWidth = 5.0;
     shapeLayer.path = curve.CGPath;
     shapeLayer.lineCap = kCALineCapRound;
     
     [self.layer addSublayer:shapeLayer];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    //图片蒙层
+    CAShapeLayer *pShapeLayer = [CAShapeLayer layer];
+    pShapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    UIBezierPath *pOtherPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    pShapeLayer.path = pOtherPath.CGPath;
+    [pOtherPath appendPath:curve];
+    pShapeLayer.path = pOtherPath.CGPath;
+    pShapeLayer.fillRule = kCAFillRuleEvenOdd;
     
-    plusShapeLayer.strokeColor = [UIColor whiteColor].CGColor;
-    plusShapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.3].CGColor;
-    plusShapeLayer.lineWidth = 9.0;
-    plusShapeLayer.path = plusCurve.CGPath;
-    plusShapeLayer.lineCap = kCALineCapRound;
+    [self.layer addSublayer:pShapeLayer];
     
-    [self.layer addSublayer:plusShapeLayer];
+    //最终路径
+    UIBezierPath *finalPath = [[UIBezierPath alloc] init];
+    CAShapeLayer *finalLayer = [[CAShapeLayer alloc] init];
+    NSValue *pointValue1 = [self pointInBezierPath].firstObject;
+    [finalPath moveToPoint:pointValue1.CGPointValue];
+    [finalPath addBezierThroughPoints:[self pointInBezierPath]];
+    finalLayer.strokeColor = RGBColorC(0x0093ff).CGColor;
+    finalLayer.fillColor = nil;
+    finalLayer.lineWidth = 5.0;
+    finalLayer.path = finalPath.CGPath;
+    finalLayer.lineCap = kCALineCapRound;
     
+    [self.layer addSublayer:finalLayer];
     
+    //最终补全路径
+    UIBezierPath *finalPlusCurve = [[UIBezierPath alloc] init];
+    CAShapeLayer *finalPlusLayer = [CAShapeLayer layer];
+    NSValue *lastPointValue = [self pointInBezierPath].lastObject;
+    NSMutableArray *plusPointArray = [NSMutableArray arrayWithObjects:firstPointValue,lastPointValue,nil];
+    [finalPlusCurve moveToPoint:lastPointValue.CGPointValue];
+    [finalPlusCurve addBezierThroughPoints:plusPointArray];
     
+    finalPlusLayer.strokeColor = RGBColorC(0x0093ff).CGColor;
+    finalPlusLayer.fillColor = nil;
+    finalPlusLayer.lineWidth = 5.0;
+    finalPlusLayer.path = finalPlusCurve.CGPath;
+    finalPlusLayer.lineCap = kCALineCapRound;
+    
+    [self.layer addSublayer:finalPlusLayer];
+
     [self setUserInteractionEnabled:NO];
 }
 
