@@ -189,29 +189,18 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //图片蒙层
-    CAShapeLayer *pShapeLayer = [CAShapeLayer layer];
-    pShapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
-    UIBezierPath *pOtherPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    pShapeLayer.path = pOtherPath.CGPath;
-    [pOtherPath appendPath:curve];
-    pShapeLayer.path = pOtherPath.CGPath;
-    pShapeLayer.fillRule = kCAFillRuleEvenOdd;
+    CAShapeLayer *coverShapeLayer = [CAShapeLayer layer];
+    coverShapeLayer.fillColor = [UIColor colorWithWhite:1.0 alpha:0.5].CGColor;
+    UIBezierPath *otherPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    coverShapeLayer.path = otherPath.CGPath;
+    [otherPath appendPath:curve];
+    coverShapeLayer.path = otherPath.CGPath;
+    coverShapeLayer.fillRule = kCAFillRuleEvenOdd;
     
-    [self.layer addSublayer:pShapeLayer];
+    [self.layer addSublayer:coverShapeLayer];
     
     //最终路径
-    UIBezierPath *finalPath = [[UIBezierPath alloc] init];
-    CAShapeLayer *finalLayer = [[CAShapeLayer alloc] init];
-    NSValue *pointValue1 = [self pointInBezierPath].firstObject;
-    [finalPath moveToPoint:pointValue1.CGPointValue];
-    [finalPath addBezierThroughPoints:[self pointInBezierPath]];
-    finalLayer.strokeColor = RGBColorC(0x0093ff).CGColor;
-    finalLayer.fillColor = nil;
-    finalLayer.lineWidth = 5.0;
-    finalLayer.path = finalPath.CGPath;
-    finalLayer.lineCap = kCALineCapRound;
-    
-    [self.layer addSublayer:finalLayer];
+    [self.layer addSublayer:shapeLayer];
     
     //最终补全路径
     UIBezierPath *finalPlusCurve = [[UIBezierPath alloc] init];
